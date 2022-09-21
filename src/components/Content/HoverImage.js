@@ -4,8 +4,11 @@ import * as THREE from 'three';
 import { PerspectiveCamera } from '@react-three/drei';
 
 import img1 from '../../images/img1.jpg';
-import img2 from '../../images/sign.png';
-import img3 from '../../images/trees.jpg';
+import img2 from '../../images/img2.jpg';
+import img3 from '../../images/img3.jpg';
+import img4 from '../../images/img4.jpg';
+import img5 from '../../images/img5.jpg';
+import img6 from '../../images/img6.jpg';
 
 const lerp = (start, end, t) => {
 	return start * (1 - t) + end * t;
@@ -22,38 +25,48 @@ window.addEventListener('mousemove', (e) => {
 	targetY = e.clientY;
 });
 
-window.addEventListener('mouseenter', () => {
-    console.log('testing')
-});
+let linkHovered = false;
+
+const addEventListeners = (element) => {
+    element.addEventListener('mouseenter', () => {
+        linkHovered = true;
+        element.classList.add('z-50')
+    })
+    element.addEventListener('mouseleave', () => {
+        linkHovered = false;
+        element.classList.add('z-50')
+    })
+}
 
 function Mesh(props) {
 	const texture1 = useLoader(THREE.TextureLoader, img1);
 	const texture2 = useLoader(THREE.TextureLoader, img2);
 	const texture3 = useLoader(THREE.TextureLoader, img3);
-	const textures = [texture1, texture2, texture3];
+	const texture4 = useLoader(THREE.TextureLoader, img4);
+	const texture5 = useLoader(THREE.TextureLoader, img5);
+	const texture6 = useLoader(THREE.TextureLoader, img6);
+	const textures = [texture1, texture2, texture3, texture4, texture5, texture6];
 
 	const meshRef = useRef(null);
 
 	useEffect(() => {
 		props.links.current.querySelectorAll('li').forEach((link, index) => {
 			link.addEventListener('mouseenter', () => {
-                meshRef.current.material.uniforms.uTexture.value = textures[index];
+				meshRef.current.material.uniforms.uTexture.value =
+					textures[index];
 			});
 
-			// link.addEventListener('mouseleave', () => {
-			// 	setUniforms((prevUniforms) => {
-			// 		return {
-			// 			...prevUniforms,
-			// 			uAlpha: {
-			// 				value: lerp(uniforms.uAlpha.value, 0.0, 0.1),
-			// 			},
-			// 		};
-			// 	});
-			// });
+			link.addEventListener('mouseleave', () => {
+				meshRef.current.material.uniforms.uAlpha.value = lerp(
+					meshRef.current.material.uniforms.uAlpha.value,
+					0.0,
+					0.1
+				);
+			});
 
-			// props.links.current.querySelectorAll('ul').forEach((ul) => {
-			// 	addEventListeners(ul);
-			// });
+			props.links.current.querySelectorAll('ul').forEach((ul) => {
+				addEventListeners(ul);
+			});
 		});
 	}, [props.links.current]);
 
@@ -61,13 +74,16 @@ function Mesh(props) {
 		offsetX = lerp(offsetX, targetX, 0.1);
 		offsetY = lerp(offsetY, targetY, 0.1);
 		meshRef.current.material.uniforms.uOffset.value = [
-			(targetX - offsetX) * 0.0005,
-			-(targetY - offsetY) * 0.0005,
+			(targetX - offsetX) * 0.001,
+			-(targetY - offsetY) * 0.001,
 		];
 
-		meshRef.current.position.x = offsetX - (window.innerWidth / 2) ;
-		meshRef.current.position.y = -offsetY + (window.innerHeight / 2);
-        // console.log(meshRef.current.material.uniforms.uTexture.value)
+		meshRef.current.position.x = offsetX - window.innerWidth / 2;
+		meshRef.current.position.y = -offsetY + window.innerHeight / 2;
+
+        linkHovered 
+        ? meshRef.current.material.uniforms.uAlpha.value = lerp(meshRef.current.material.uniforms.uAlpha.value, 1.0, 0.1) 
+        : meshRef.current.material.uniforms.uAlpha.value = lerp(meshRef.current.material.uniforms.uAlpha.value, 0.0, 0.1);
 	});
 
 	return (
@@ -106,11 +122,11 @@ function Mesh(props) {
                 varying vec2 vUv;
           
                 void main() {
-                  vec3 color = texture2D(uTexture,vUv).rgb;
-                  gl_FragColor = vec4(color,1.0);
+                  vec3 color = texture2D(uTexture, vUv).rgb;
+                  gl_FragColor = vec4(color, uAlpha);
                 }
               `}
-              transparent
+				transparent
 			/>
 			{/* <meshStandardMaterial
 				attach="material"
@@ -142,7 +158,7 @@ const HoverImage = (props) => {
 
 	return (
 		<>
-			<div className="w-screen h-screen absolute top-0 left-0">
+			<div className="w-screen h-screen absolute top-0 left-0 z-10">
 				<Canvas
 					flat
 					gl={{ antialias: true, toneMapping: THREE.NoToneMapping }}
@@ -162,7 +178,7 @@ const HoverImage = (props) => {
 							position={[offsetX, offsetY, 0]}
 							currentTexture={currentTexture}
 							opacity={1}
-                            links={props.links}
+							links={props.links}
 						/>
 					</Suspense>
 				</Canvas>

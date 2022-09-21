@@ -11,7 +11,7 @@ const Container = (props) => {
             <div className="w-screen h-screen bg-background bg-center bg-no-repeat fixed bg-cover z-[-10]"></div>
 			<img
 				src={logo}
-				className="w-[60px] max-w-full top-5 left-5 fixed cursor-pointer p-2 z-0"
+				className="w-[60px] max-w-full top-5 left-5 fixed cursor-pointer p-2 z-50"
 				onClick={props.onClick.bind(null, true)}
                 alt="logo"
 			/>
@@ -23,7 +23,7 @@ const Container = (props) => {
                         alt="sign"
 					/>
 				</div>
-				<div className="w-full max-w-[560px] z-10">
+				<div className="w-full max-w-[560px]">
 					<Lineup />
 				</div>
 			</div>

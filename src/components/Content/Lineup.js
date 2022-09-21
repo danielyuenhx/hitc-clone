@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
-import special from '../../icons/special_guest.png';
+import HoverImage from './HoverImage';
+
+import special from '../../images/special_guest.png';
 
 const Lineup = () => {
+	const lineupRef = useRef(null);
+
 	return (
-		<>
-			<div className="flex justify-center items-center relative w-full text-center font-bold text-lg tracking-tight p-7 ">
+		<div>
+			<HoverImage links={lineupRef} />
+			<div className="flex justify-center items-center relative w-full text-center font-bold text-lg tracking-tight pt-7 pb-7 select-none" ref={lineupRef}>
 				<ul className="w-full [&>*]:pt-1">
 					<li>Atarashii Gakko!</li>
 					<li>HunBaoBao</li>
@@ -24,7 +29,7 @@ const Lineup = () => {
 				</ul>
 			</div>
 			<img src={special} className="w-[200px]" alt="special guest" />
-		</>
+		</div>
 	);
 };
 

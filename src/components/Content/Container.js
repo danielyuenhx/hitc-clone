@@ -2,8 +2,8 @@ import React from 'react';
 
 import Lineup from './Right';
 
-import logo from '../../icons/white-logo.png';
-import sign from '../../icons/sign.png';
+import logo from '../../images/white-logo.png';
+import sign from '../../images/sign.png';
 
 const Container = (props) => {
 	return (

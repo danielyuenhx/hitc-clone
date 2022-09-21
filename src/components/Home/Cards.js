@@ -2,9 +2,9 @@ import React from 'react';
 
 import Card from './Card';
 
-import img1 from '../../icons/88_HITC_SplashPage01-scaled.jpg';
-import img2 from '../../icons/88_HITC_SplashPage03-scaled.jpg';
-import img3 from '../../icons/88_HITC_SplashPage03.jpg';
+import img1 from '../../images/88_HITC_SplashPage01-scaled.jpg';
+import img2 from '../../images/88_HITC_SplashPage03-scaled.jpg';
+import img3 from '../../images/88_HITC_SplashPage03.jpg';
 
 const Cards = (props) => {
 	return (

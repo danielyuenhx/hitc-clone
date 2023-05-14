@@ -20,9 +20,9 @@ const Lineup = () => {
 				ref={lineupRef}
 			>
 				<ul className="w-full [&>*]:pt-1">
-					<li>Atarashii Gakko!</li>
-					<li>HunBaoBao</li>
-					<li>Eaj</li>
+					<li>The 1975</li>
+					<li>The Strokes</li>
+					<li>Drake</li>
 				</ul>
 				<ul className="w-full [&>*]:pt-1">
 					<li>Rich Brian</li>

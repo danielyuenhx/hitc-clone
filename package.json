@@ -1,8 +1,8 @@
 {
-  "name": "earth999",
+  "name": "hitc-clone",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://danielyuenhx.github.io/earth999",
+  "homepage": "https://danielyuenhx.github.io/hitc-clone",
   "dependencies": {
     "@react-three/drei": "^9.31.1",
     "@react-three/fiber": "^8.7.4",

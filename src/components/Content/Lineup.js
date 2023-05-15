@@ -1,9 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 import HoverImage from './HoverImage';
-
-import special from '../../images/special_guest.png';
 
 const Lineup = () => {
 	const lineupRef = useRef(null);

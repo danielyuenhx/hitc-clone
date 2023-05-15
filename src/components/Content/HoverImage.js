@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, Suspense, useMemo } from 'react';
+import React, { useEffect, useRef, useState, Suspense } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
 import { PerspectiveCamera } from '@react-three/drei';
@@ -71,8 +71,8 @@ function Mesh(props) {
 	}, [props.links.current]);
 
 	useFrame((state, delta, xrFrame) => {
-		offsetX = lerp(offsetX, targetX, 0.1);
-		offsetY = lerp(offsetY, targetY, 0.1);
+		offsetX = lerp(offsetX, targetX, 0.05);
+		offsetY = lerp(offsetY, targetY, 0.05);
 		meshRef.current.material.uniforms.uOffset.value = [
 			(targetX - offsetX) * 0.001,
 			-(targetY - offsetY) * 0.001,
